@@ -279,6 +279,10 @@ function GetPrerequisites()
           # Debian Next
           su -c "aptitude -y install curl build-essential autoconf automake cmake libbz2-dev libace-dev libssl-dev libmysqlclient-dev libtool" root
           ;;
+        "buster")
+          # Debian 10
+          su -c "aptitude -y install curl build-essential autoconf automake cmake libbz2-dev libace-dev libssl-dev libmariadb-dev libtool" root
+          ;;
         *)
           OS_VER=0
           ;;
