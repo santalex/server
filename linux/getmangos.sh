@@ -149,8 +149,8 @@ function GetPrerequisites()
   if [ $? -ne 0 ]; then
     Log "yum isn't the installer by default" 1
   else
-  installer=1
-  yum -y install git redhat-lsb curl
+    installer=1
+    yum -y install git redhat-lsb curl
   fi
 
   which aptitude
@@ -248,22 +248,22 @@ function GetPrerequisites()
           # Ubuntu 16.10
           su -c "apt-get -y install build-essential curl autoconf automake cmake libbz2-dev libace-dev libssl-dev libmysqlclient-dev libtool" root
           ;;
-  "zesty")
-    # Ubuntu 17.04
-    su -c "apt-get -y install build-essential curl autoconf automake cmake libbz2-dev libace-dev libssl-dev libmysqlclient-dev libtool" root
-    ;;
-  "artful")
-    # Ubuntu 17.10
-    su -c "apt-get -y install build-essential curl autoconf automake cmake libbz2-dev libace-dev libssl-dev libmysqlclient-dev libtool" root
-    ;;
-    "bionic")
-    # Ubuntu 18.04 LTS
-    su -c "apt-get -y install build-essential curl autoconf automake cmake libbz2-dev libace-dev libssl-dev libmysqlclient-dev libtool" root
-    ;;
-    "disco")
-    # Ubuntu 19.04
-    su -c "apt-get -y install build-essential curl autoconf automake cmake libbz2-dev libace-dev libssl-dev libmysqlclient-dev libtool" root
-    ;;
+      "zesty")
+        # Ubuntu 17.04
+        su -c "apt-get -y install build-essential curl autoconf automake cmake libbz2-dev libace-dev libssl-dev libmysqlclient-dev libtool" root
+        ;;
+      "artful")
+        # Ubuntu 17.10
+        su -c "apt-get -y install build-essential curl autoconf automake cmake libbz2-dev libace-dev libssl-dev libmysqlclient-dev libtool" root
+        ;;
+        "bionic")
+        # Ubuntu 18.04 LTS
+        su -c "apt-get -y install build-essential curl autoconf automake cmake libbz2-dev libace-dev libssl-dev libmysqlclient-dev libtool" root
+        ;;
+        "disco")
+        # Ubuntu 19.04
+        su -c "apt-get -y install build-essential curl autoconf automake cmake libbz2-dev libace-dev libssl-dev libmysqlclient-dev libtool" root
+        ;;
         *)
           OS_VER=0
           ;;
@@ -307,12 +307,12 @@ function GetPrerequisites()
       case ${VER} in
         "Core")
           # Default CentOS - Adding necessary RPM third-party.
-      rpm -Uv ftp://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensuse/repositories/devel:/libraries:/ACE:/micro/CentOS_7/x86_64/ace-6.3.3-55.1.x86_64.rpm
-      rpm -Uv ftp://rpmfind.net/linux/centos/7/os/x86_64/Packages/perl-Net-Telnet-3.03-19.el7.noarch.rpm
-      rpm -Uv ftp://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensuse/repositories/devel:/libraries:/ACE:/micro:/versioned/CentOS_7/x86_64/mpc-6.3.3-42.1.x86_64.rpm
-      rpm -Uv ftp://rpmfind.net/linux/centos/7/os/x86_64/Packages/libtool-2.4.2-22.el7_3.x86_64.rpm
-      rpm -Uv ftp://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensuse/repositories/devel:/libraries:/ACE:/micro/CentOS_7/x86_64/ace-devel-6.3.3-55.1.x86_64.rpm
-      su -c "yum -y install epel-release"
+          rpm -Uv ftp://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensuse/repositories/devel:/libraries:/ACE:/micro/CentOS_7/x86_64/ace-6.3.3-55.1.x86_64.rpm
+          rpm -Uv ftp://rpmfind.net/linux/centos/7/os/x86_64/Packages/perl-Net-Telnet-3.03-19.el7.noarch.rpm
+          rpm -Uv ftp://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensuse/repositories/devel:/libraries:/ACE:/micro:/versioned/CentOS_7/x86_64/mpc-6.3.3-42.1.x86_64.rpm
+          rpm -Uv ftp://rpmfind.net/linux/centos/7/os/x86_64/Packages/libtool-2.4.2-22.el7_3.x86_64.rpm
+          rpm -Uv ftp://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensuse/repositories/devel:/libraries:/ACE:/micro/CentOS_7/x86_64/ace-devel-6.3.3-55.1.x86_64.rpm
+          su -c "yum -y install epel-release"
           su -c "yum -y install curl autoconf automake cmake3 ace-devel ace-6.3.3 openssl-devel mysql-devel libtool gcc-c++" root
           ;;
         *)
@@ -323,23 +323,23 @@ function GetPrerequisites()
     "Fedora")
       case ${VER} in
         "TwentyFive")
-          # Fedora 25 - Adding necessary RPM third-party.
-      su -c "yum -y install autoconf automake libtool gcc-c++" root
-      # Getting and building ACE. Not provided in RPM for Fedora...
-      rm -rf ACE-6.3.3.tar.bz2
-      rm -rf ACE_wrappers
-      wget ftp://download.dre.vanderbilt.edu/previous_versions/ACE-6.3.3.tar.bz2
-      tar xjvf ACE-6.3.3.tar.bz2
-      export ACE_ROOT=/root/ACE_wrappers
-      echo '#include "ace/config-linux.h"' >> $ACE_ROOT/ace/config.h
-      echo 'include $(ACE_ROOT)/include/makeinclude/platform_linux.GNU' >> $ACE_ROOT/include/makeinclude/platform_macros.GNU
-      echo 'INSTALL_PREFIX=/usr/local' >> $ACE_ROOT/include/makeinclude/platform_macros.GNU
-      export LD_LIBRARY_PATH=$ACE_ROOT/lib:$LD_LIBRARY_PATH
-      CD $ACE_ROOT
-      make
-      make install
-      cd ~
-      # Installing remaining dependencies..
+            # Fedora 25 - Adding necessary RPM third-party.
+        su -c "yum -y install autoconf automake libtool gcc-c++" root
+        # Getting and building ACE. Not provided in RPM for Fedora...
+        rm -rf ACE-6.3.3.tar.bz2
+        rm -rf ACE_wrappers
+        wget ftp://download.dre.vanderbilt.edu/previous_versions/ACE-6.3.3.tar.bz2
+        tar xjvf ACE-6.3.3.tar.bz2
+        export ACE_ROOT=/root/ACE_wrappers
+        echo '#include "ace/config-linux.h"' >> $ACE_ROOT/ace/config.h
+        echo 'include $(ACE_ROOT)/include/makeinclude/platform_linux.GNU' >> $ACE_ROOT/include/makeinclude/platform_macros.GNU
+        echo 'INSTALL_PREFIX=/usr/local' >> $ACE_ROOT/include/makeinclude/platform_macros.GNU
+        export LD_LIBRARY_PATH=$ACE_ROOT/lib:$LD_LIBRARY_PATH
+        CD $ACE_ROOT
+        make
+        make install
+        cd ~
+        # Installing remaining dependencies..
           su -c "yum -y install cmake openssl-devel mariadb-devel" root
           ;;
         *)
@@ -956,11 +956,11 @@ function UpdateDatabases()
 
     # Notify the user of which updates were and were not applied
     if [ $? -ne 0 ]; then
-       Log "Database update \"$pFile\" was not applied!" 0
-     Log "Database update \"$pFile\" was not applied!" 1
+      Log "Database update \"$pFile\" was not applied!" 0
+      Log "Database update \"$pFile\" was not applied!" 1
     else
-       Log "Database update \"$pFile\" was successfully applied!" 0
-     Log "Database update \"$pFile\" was successfully applied!" 1
+      Log "Database update \"$pFile\" was successfully applied!" 0
+      Log "Database update \"$pFile\" was successfully applied!" 1
     fi
   done
 
@@ -975,10 +975,10 @@ function UpdateDatabases()
     # Notify the user of which updates were and were not applied
     if [ $? -ne 0 ]; then
       Log "Database update \"$pFile\" was not applied!" 0
-    Log "Database update \"$pFile\" was not applied!" 1
+      Log "Database update \"$pFile\" was not applied!" 1
     else
       Log "Database update \"$pFile\" was successfully applied!" 0
-    Log "Database update \"$pFile\" was successfully applied!" 1
+      Log "Database update \"$pFile\" was successfully applied!" 1
     fi
   done
 
@@ -993,10 +993,10 @@ function UpdateDatabases()
     # Notify the user of which updates were and were not applied
     if [ $? -ne 0 ]; then
       Log "Database update \"$pFile\" was not applied!" 0
-    Log "Database update \"$pFile\" was not applied!" 1
+      Log "Database update \"$pFile\" was not applied!" 1
     else
       Log "Database update \"$pFile\" was successfully applied!" 0
-    Log "Database update \"$pFile\" was successfully applied!" 1
+      Log "Database update \"$pFile\" was successfully applied!" 1
     fi
   done
 }
@@ -1055,8 +1055,8 @@ function InstallDatabases()
     if [ $? -ne 0 ]; then
       Log "There was an error processing \"$fFile\" during database creation!" 1
       return 1
-  else
-    Log "The file \"$fFile\" was processed properly" 1
+    else
+      Log "The file \"$fFile\" was processed properly" 1
     fi
   done
 
@@ -1110,8 +1110,8 @@ function HandleDatabases()
 
   # Exit if cancelled
   if [ $? -ne 0 ]; then
-  Log "Database type selection cancelled. No modifications have been made to your databases." 1
-  return 0
+    Log "Database type selection cancelled. No modifications have been made to your databases." 1
+    return 0
   fi
 
   # Get the database hostname or IP address
@@ -1320,28 +1320,28 @@ function ExtractResources
         cp -R "$GAMEPATH/maps" "$INSTPATH/bin"
       fi
     else
-  rm -rf $GAMEPATH/map-extractor
-  cp "$INSTPATH/bin/tools/map-extractor" "$GAMEPATH"
+      rm -rf $GAMEPATH/map-extractor
+      cp "$INSTPATH/bin/tools/map-extractor" "$GAMEPATH"
 
-  Log "Extracting DBC and Maps" 0
-  cd $GAMEPATH
-  ./map-extractor
+      Log "Extracting DBC and Maps" 0
+      cd $GAMEPATH
+      ./map-extractor
 
-  if [ $? -eq 0 ]; then
-    Log "DBC and Maps are extracted" 0
-    Log "Copying DBC and Maps files to installation directory" 0
-    cp -R "$GAMEPATH/dbc" "$INSTPATH/bin"
-          cp -R "$GAMEPATH/maps" "$INSTPATH/bin"
-          rm -rf "$GAMEPATH/map-extractor"
-          Log "Changing ownership of the extracted directories"
-          chown -R $USER:$USER "$INSTPATH"
-        else
-          Log "There was an issue while extracting DBC and Maps!" 1
-          rm -rf "$GAMEPATH/map-extractor"
-          rm -rf "$GAMEPATH/dbc"
-          rm -rf "$GAMEPATH/maps"
-          exit 1
-        fi
+      if [ $? -eq 0 ]; then
+        Log "DBC and Maps are extracted" 0
+        Log "Copying DBC and Maps files to installation directory" 0
+        cp -R "$GAMEPATH/dbc" "$INSTPATH/bin"
+        cp -R "$GAMEPATH/maps" "$INSTPATH/bin"
+        rm -rf "$GAMEPATH/map-extractor"
+        Log "Changing ownership of the extracted directories"
+        chown -R $USER:$USER "$INSTPATH"
+      else
+        Log "There was an issue while extracting DBC and Maps!" 1
+        rm -rf "$GAMEPATH/map-extractor"
+        rm -rf "$GAMEPATH/dbc"
+        rm -rf "$GAMEPATH/maps"
+        exit 1
+      fi
     fi
   fi
 
@@ -1521,7 +1521,7 @@ function ExtractResources
           Log "Changing ownership of the extracted directories"
           chown -R $USER:$USER "$INSTPATH"
         else
-    Log "There was an issue while extracting MMaps!" 1
+          Log "There was an issue while extracting MMaps!" 1
           rm -rf "$GAMEPATH/MoveMapGen.sh"
           rm -rf "$GAMEPATH/mmaps"
           rm -rf "$GAMEPATH/offmesh.txt"
